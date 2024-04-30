@@ -15,3 +15,10 @@
 * Admin panel provides comprehensive inventory management tools for businesses to efficiently manage their product listings. 
 
 * An user-centric interface that promotes trust and facilitates transactions for both businesses and customers.
+
+
+### Tech Stack -
+
+* Frontend - React
+* Backend - Go, PostgreSQL
+* Deployment - Digital Ocean
