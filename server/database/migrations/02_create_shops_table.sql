@@ -8,5 +8,7 @@ CREATE TABLE Shops (
     map_location VARCHAR NOT NULL,
     shop_type VARCHAR(100) NOT NULL,
     shop_description VARCHAR(500) NOT NULL,
+    city VARCHAR NOT NULL,
+    country VARCHAR NOT NULL,
     FOREIGN KEY (owner_id) REFERENCES Users(id)
 );
