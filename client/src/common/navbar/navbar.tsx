@@ -61,7 +61,7 @@ export function Navbar() {
               THE RENT APP
             </Link>
           </Typography>
-          <Box sx={seperatorBoxSxProps}>Hi, {currentUser?.firstname}</Box>
+          <Box sx={seperatorBoxSxProps}>{currentUser?.firstname && `Hi, ${currentUser?.firstname}` }</Box>
           <SearchBar />
           {currentUser?.id !== undefined && (
             <Box display="flex">

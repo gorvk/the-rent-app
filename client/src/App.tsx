@@ -33,25 +33,24 @@ function App() {
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const dispatch = useDispatch();
 
-  const isLoggedIn = async (): Promise<void> => {
-    const setCurrentUser = userSlice.actions.setCurrentUser;
-    try {
-      const response: IGetUserOutput = await isLoggedInApi();
-      if (response.isSuccess) {
-        const currentUser = response.result;
-        dispatch(setCurrentUser(currentUser));
-      } else {
+  useEffect(() => {
+    const isLoggedIn = async (): Promise<void> => {
+      const setCurrentUser = userSlice.actions.setCurrentUser;
+      try {
+        const response: IGetUserOutput = await isLoggedInApi();
+        if (response.isSuccess) {
+          const currentUser = response.result;
+          dispatch(setCurrentUser(currentUser));
+        } else {
+          const currentUser = {} as IUser;
+          dispatch(setCurrentUser(currentUser));
+        }
+      } catch (error) {
         const currentUser = {} as IUser;
         dispatch(setCurrentUser(currentUser));
+        console.error(error);
       }
-    } catch (error) {
-      const currentUser = {} as IUser;
-      dispatch(setCurrentUser(currentUser));
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
+    };
     isLoggedIn();
     // eslint-disable-next-line
   }, []);
@@ -59,7 +58,7 @@ function App() {
   if (currentUser === null) {
     return <h1>Loading...</h1>;
   }
-  
+
   const isAuthenticated: boolean = currentUser.id !== undefined;
   return (
     <BrowserRouter>

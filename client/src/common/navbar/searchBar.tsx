@@ -1,11 +1,7 @@
 import { Paper, InputBase, IconButton, SxProps, Theme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useRef, useState } from "react";
-import { getSearchedProductsApi } from "../../svc/product";
-import { ISearchProductsInput } from "../../interfaces/inputs";
-import productsSlice from "../../state/slices/productsSlice";
-import { useDispatch } from "react-redux";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchContainer = styled("div")(({ theme }) => ({
@@ -52,7 +48,7 @@ export const SearchBar = () => {
   ) => {
     const searchTerm = filterSearchTerm(event);
     if (!searchTerm) return;
-    navigate({ pathname: "/search-product", search: `?q=${searchTerm}` });
+    navigate({ pathname: "/search-product", search: `?q=${searchTerm}`});
   };
 
   return (
