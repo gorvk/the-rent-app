@@ -21,3 +21,7 @@ export interface ILoginInput {
     email: string;
     accountPassword: string
 }
+
+export interface ISearchProductsInput {
+    searchTerm: string
+}

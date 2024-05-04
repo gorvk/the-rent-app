@@ -3,7 +3,7 @@ import { RootState } from "../state/store";
 
 const Shop = () => {
   const currentUser = useSelector((state: RootState) => {
-    console.log(state);
+    console.log(state.currentUser);
     return state.currentUser;
   });
   return (

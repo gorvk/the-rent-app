@@ -24,21 +24,21 @@ func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var products []customTypes.Product
+	var products []customTypes.SearchProductView
 
 	defer rows.Close()
 	for rows.Next() {
-		row := customTypes.Product{}
+		row := customTypes.SearchProductView{}
 		rows.Scan(
-			&row.Id,
 			&row.ProductName,
-			&row.ShopId,
 			&row.ProductType,
 			&row.ProductCondition,
 			&row.Price,
-			&row.OriginalPurchasedDate,
-			&row.OriginalPurchaisingRecieptNo,
 			&row.ProductDescription,
+			&row.ShopId,
+			&row.ShopName,
+			&row.City,
+			&row.Country,
 		)
 		products = append(products, row)
 	}

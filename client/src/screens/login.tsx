@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { isLoggedInApi, loginApi } from "../svc/auth";
 import { ILoginInput } from "../interfaces/inputs";
 import { useDispatch } from "react-redux";
-import { actions } from "../state/user/userSlice";
+import userSlice from "../state/slices/userSlice";
 
 const defaultTheme = createTheme();
 
@@ -32,7 +32,7 @@ export default function Login() {
       const loginResponse = await loginApi(payload);
       if (loginResponse.isSuccess) {
         const isLoggedInResponse = await isLoggedInApi();
-        const setCurrentUser = actions.setCurrentUser; 
+        const setCurrentUser = userSlice.actions.setCurrentUser;
         dispacth(setCurrentUser(isLoggedInResponse.result));
         navigate("/");
       }

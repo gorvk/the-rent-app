@@ -21,11 +21,23 @@ export interface IProduct {
 }
 
 export interface IShop {
-    ownerId : number,
-    shopName : string,
-    email : string,
-    phoneNumber : string,
-    mapLocation : string,
-    shopType : string,
-    shopDescription : string
+    ownerId: number,
+    shopName: string,
+    email: string,
+    phoneNumber: string,
+    mapLocation: string,
+    shopType: string,
+    shopDescription: string
+}
+
+export interface IProductCard {
+    shopId: number,
+    productName: string,
+    productType: string,
+    productCondition: string,
+    price: string,
+    productDescription: string,
+    shopName: string,
+    city: string,
+    country: string
 }

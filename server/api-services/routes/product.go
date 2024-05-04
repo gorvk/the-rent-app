@@ -12,4 +12,5 @@ func init() {
 	http.HandleFunc("/api/product/get-all-products", controllers.GetAllProducts)
 	http.HandleFunc("/api/product/update", controllers.UpdateProduct)
 	http.HandleFunc("/api/product/delete", controllers.DeleteProduct)
+	http.HandleFunc("/api/product/search", controllers.SearchProducts)
 }

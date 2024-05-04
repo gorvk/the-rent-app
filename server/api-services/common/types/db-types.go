@@ -20,6 +20,8 @@ type Shop struct {
 	MapLocation     string `db:"map_location" json:"mapLocation"`
 	ShopType        string `db:"shop_type" json:"shopType"`
 	ShopDescription string `db:"shop_description" json:"shopDescription"`
+	City            string `db:"city" json:"city"`
+	Country         string `db:"country" json:"country"`
 }
 
 type Product struct {
@@ -32,4 +34,16 @@ type Product struct {
 	OriginalPurchasedDate        string `db:"original_purchased_date" json:"originalPurchasedDate"`
 	OriginalPurchaisingRecieptNo string `db:"original_purchaising_reciept_no" json:"originalPurchaisingRecieptNo"`
 	ProductDescription           string `db:"product_description" json:"productDescription"`
+}
+
+type SearchProductView struct {
+	ShopId             int    `db:"shop_id" json:"shopId"`
+	ProductName        string `db:"product_name" json:"productName"`
+	ProductType        string `db:"product_type" json:"productType"`
+	ProductCondition   string `db:"product_condition" json:"productCondition"`
+	Price              string `db:"price" json:"price"`
+	ProductDescription string `db:"product_description" json:"productDescription"`
+	ShopName           string `db:"shop_name" json:"shopName"`
+	City               string `db:"city" json:"city"`
+	Country            string `db:"country" json:"country"`
 }

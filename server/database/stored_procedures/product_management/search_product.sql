@@ -1,12 +1,11 @@
 CREATE EXTENSION pg_trgm;
 CREATE OR REPLACE FUNCTION search_in_products(IN search_term TEXT) RETURNS TABLE (
-        shop_id INTEGER,
         product_name VARCHAR,
         product_type VARCHAR,
         product_condition VARCHAR,
         price MONEY,
         product_description VARCHAR,
-        id INTEGER,
+        shop_id INTEGER,
         shop_name VARCHAR,
         city VARCHAR,
         country VARCHAR,

@@ -13,11 +13,13 @@ import {
 } from "react-router-dom";
 import { Navbar } from "./common/navbar/navbar";
 import Register from "./screens/register";
-import { actions } from "./state/user/userSlice";
+import userSlice from "./state/slices/userSlice";
 import { isLoggedInApi } from "./svc/auth";
-import AllProducts from "./screens/allProduct";
+import Home from "./screens/home";
 import Login from "./screens/login";
 import Shop from "./screens/shop";
+import Product from "./screens/productDetails";
+import { SearchResult } from "./screens/searchResult";
 
 const ProtectedRoute = (props: {
   isAuthenticated: boolean;
@@ -32,7 +34,7 @@ function App() {
   const dispatch = useDispatch();
 
   const isLoggedIn = async (): Promise<void> => {
-    const setCurrentUser = actions.setCurrentUser;
+    const setCurrentUser = userSlice.actions.setCurrentUser;
     try {
       const response: IGetUserOutput = await isLoggedInApi();
       if (response.isSuccess) {
@@ -63,7 +65,9 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<AllProducts />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/search-product" element={<SearchResult />} />
         <Route
           element={
             <ProtectedRoute

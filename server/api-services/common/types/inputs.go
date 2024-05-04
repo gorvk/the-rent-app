@@ -61,3 +61,7 @@ type DELETE_PRODUCT_INPUT struct {
 type GET_PRODUCT_BY_ID_INPUT struct {
 	Id int `db:"id" json:"id"`
 }
+
+type SEARCH_PRODUCTS_INPUT struct {
+	SearchTerm string `db:"search_term" json:"searchTerm"`
+}

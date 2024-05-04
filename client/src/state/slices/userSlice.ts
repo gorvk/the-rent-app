@@ -4,12 +4,12 @@ import { IUser } from "../../interfaces/models";
 
 const initialState: IUser | null = null as IUser | null;
 
-const setCurrentUser = (state: IUser | null, action: PayloadAction<IUser | null>) => {
+const setCurrentUser = (_: IUser | null, action: PayloadAction<IUser | null>) => {
     return action.payload;
 }
 
-const removeCurrentUser = (state: IUser | null) => {
-    state = {} as IUser;
+const removeCurrentUser = () => {
+    return {} as IUser;
 }
 
 const slice = createSlice({
@@ -18,5 +18,5 @@ const slice = createSlice({
     reducers: { setCurrentUser, removeCurrentUser }
 });
 
-export const actions = slice.actions;
-export default slice.reducer;
+const reducerActions = { actions: slice.actions, reducer: slice.reducer };
+export default reducerActions;  

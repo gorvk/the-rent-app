@@ -1,7 +1,7 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { logoutApi } from "../../svc/auth";
-import { actions } from "../../state/user/userSlice";
+import userSlice from "../../state/slices/userSlice";
 import { IUser } from "../../interfaces/models";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ const AccountMenu = (props: {
     try {
       const loginResponse = await logoutApi();
       if (loginResponse.isSuccess) {
-        const setCurrentUser = actions.setCurrentUser;
+        const setCurrentUser = userSlice.actions.setCurrentUser;
         handleAccountMenuClose();
         dispatch(setCurrentUser({} as IUser));
         navigate("/login");

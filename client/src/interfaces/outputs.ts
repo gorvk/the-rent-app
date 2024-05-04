@@ -1,8 +1,8 @@
-import { IProduct, IUser } from "./models";
+import { IProduct, IProductCard, IUser } from "./models";
 
 export interface IGetAllProductsOutput {
     isSuccess: boolean,
-    result: IProduct[]
+    result: IProductCard[]
 }
 
 export interface IGetUserOutput {
@@ -13,4 +13,9 @@ export interface IGetUserOutput {
 export interface ICommonOutput {
     isSuccess: boolean,
     result: boolean
+}
+
+export interface IGetSearchedProductsOutput {
+    isSuccess: boolean,
+    result: IProductCard[]
 }
