@@ -20,3 +20,15 @@ export const getMethodPostHeader = (payload: any): RequestInit | undefined => {
         credentials: "include"
     }
 }
+
+export const getMethodPutHeader = (payload: any): RequestInit | undefined => {
+    return {
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json',
+        },
+        method: "PUT",
+        body: JSON.stringify(payload),
+        credentials: "include"
+    }
+}

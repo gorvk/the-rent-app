@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProductsList } from "../common/product/productsList";
+import { ProductsList } from "../components/product/productsList";
 import { ISearchProductsInput } from "../interfaces/inputs";
 import { IProductCard } from "../interfaces/models";
 import { getSearchedProductsApi } from "../svc/product";

@@ -19,6 +19,6 @@
 
 ### Tech Stack -
 
-* Frontend - React
-* Backend - Go, PostgreSQL
+* Frontend - React (18.3.1)
+* Backend - Go (1.22.1), PostgreSQL (16.2)
 * Deployment - Digital Ocean

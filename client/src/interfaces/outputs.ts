@@ -19,3 +19,8 @@ export interface IGetSearchedProductsOutput {
     isSuccess: boolean,
     result: IProductCard[]
 }
+
+export interface IGetCurrentShopProductOutput {
+    isSuccess: boolean,
+    result: IProductCard[]
+}

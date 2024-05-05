@@ -25,6 +25,8 @@ type CREATE_SHOP_INPUT struct {
 	MapLocation     string `db:"map_location" json:"mapLocation"`
 	ShopType        string `db:"shop_type" json:"shopType"`
 	ShopDescription string `db:"shop_description" json:"shopDescription"`
+	City            string `db:"city" json:"city"`
+	Country         string `db:"country" json:"country"`
 }
 
 type UPDATE_SHOP_INPUT struct {

@@ -1,8 +1,9 @@
 import { ILoginInput, IRegisterInput } from "../interfaces/inputs";
 import { ICommonOutput, IGetUserOutput } from "../interfaces/outputs";
 import { getMethodGetHeader, getMethodPostHeader } from "../utils/https";
+import { API_URL } from "../utils/constants";
 
-const baseUrl = 'http://localhost:9090/api/auth';
+const baseUrl = API_URL + "/auth";
 
 export const loginApi = async (payload: ILoginInput): Promise<ICommonOutput> => {
     const url: string = '/login';

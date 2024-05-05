@@ -19,6 +19,7 @@ func init() {
 
 func main() {
 	configureListenAndServe()
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {})
 }
 
 func addCorsHeaders(handler http.Handler) http.Handler {

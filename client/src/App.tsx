@@ -11,7 +11,7 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { Navbar } from "./common/navbar/navbar";
+import { Navbar } from "./components/navbar/navbar";
 import Register from "./screens/register";
 import userSlice from "./state/slices/userSlice";
 import { isLoggedInApi } from "./svc/auth";

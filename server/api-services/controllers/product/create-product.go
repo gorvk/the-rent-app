@@ -81,6 +81,8 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 			&shop.MapLocation,
 			&shop.ShopType,
 			&shop.ShopDescription,
+			&shop.City,
+			&shop.Country,
 		)
 	}
 

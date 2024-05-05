@@ -11,7 +11,6 @@ export interface IUser {
 
 export interface IProduct {
     productName: string,
-    shopId: number,
     productType: string,
     productCondition: string,
     price: string,
@@ -31,7 +30,6 @@ export interface IShop {
 }
 
 export interface IProductCard {
-    shopId: number,
     productName: string,
     productType: string,
     productCondition: string,

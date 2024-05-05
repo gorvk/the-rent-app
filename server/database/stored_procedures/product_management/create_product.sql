@@ -28,4 +28,5 @@ CREATE OR REPLACE PROCEDURE create_product (
         _original_purchaising_reciept_no,
         _product_description
     );
+    REFRESH MATERIALIZED VIEW search_products_view;
 $$

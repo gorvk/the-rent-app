@@ -5,7 +5,9 @@ CREATE OR REPLACE PROCEDURE create_shop (
     _phone_number VARCHAR,
     _map_location VARCHAR,
     _shop_type VARCHAR,
-    _shop_description VARCHAR
+    _shop_description VARCHAR,
+    _city VARCHAR,
+    _country VARCHAR
 ) LANGUAGE SQL AS $$
     INSERT INTO Shops (
         owner_id,
@@ -14,7 +16,9 @@ CREATE OR REPLACE PROCEDURE create_shop (
         phone_number,
         map_location,
         shop_type,
-        shop_description
+        shop_description,
+        city,
+        country
     )
     VALUES (
         _owner_id,
@@ -23,6 +27,8 @@ CREATE OR REPLACE PROCEDURE create_shop (
         _phone_number,
         _map_location,
         _shop_type,
-        _shop_description
+        _shop_description,
+        _city,
+        _country
     );
 $$

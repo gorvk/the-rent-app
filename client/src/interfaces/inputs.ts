@@ -1,11 +1,11 @@
 export interface IUpdateUserInput {
-    isShopEnabled: boolean,
-    firstname: string,
-    email: string,
-    lastName: string,
-    phoneNumber: string,
-    userAddress: string,
-    accountPassword: string,
+    isShopEnabled: boolean;
+    firstname: string;
+    email: string;
+    lastName: string;
+    phoneNumber: string;
+    userAddress: string;
+    accountPassword: string;
 }
 
 export interface IRegisterInput {
@@ -19,9 +19,30 @@ export interface IRegisterInput {
 
 export interface ILoginInput {
     email: string;
-    accountPassword: string
+    accountPassword: string;
 }
 
 export interface ISearchProductsInput {
-    searchTerm: string
+    searchTerm: string;
+}
+
+export interface ICreateShopInput {
+    shopName: string;
+    email: string;
+    phoneNumber: string;
+    mapLocation: string;
+    shopType: string;
+    shopDescription: string;
+    city: string;
+    country: string;
+}
+
+export interface ICreateProductInput {
+    productName: string,
+    productType: string,
+    productCondition: string,
+    price: string,
+    originalPurchasedDate: string,
+    originalPurchaisingRecieptNo: string,
+    productDescription: string,
 }

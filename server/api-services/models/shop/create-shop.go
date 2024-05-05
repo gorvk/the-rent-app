@@ -13,7 +13,7 @@ func CreateNewShop(shop customTypes.CREATE_SHOP_INPUT, userId int) (sql.Result, 
 		return nil, nil
 	}
 
-	stmt, err := db.Prepare("CALL create_shop($1, $2, $3, $4, $5, $6, $7)")
+	stmt, err := db.Prepare("CALL create_shop($1, $2, $3, $4, $5, $6, $7, $8, $9)")
 
 	if err != nil {
 		return nil, err
@@ -28,6 +28,8 @@ func CreateNewShop(shop customTypes.CREATE_SHOP_INPUT, userId int) (sql.Result, 
 		shop.MapLocation,
 		shop.ShopType,
 		shop.ShopDescription,
+		shop.City,
+		shop.Country,
 	)
 
 	return rows, err
