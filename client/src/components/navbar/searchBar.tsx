@@ -1,13 +1,13 @@
-import { Paper, InputBase, IconButton, SxProps, Theme } from "@mui/material";
+import { InputBase, IconButton, SxProps, Theme } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchContainer = styled("div")(({ theme }) => ({
+const SearchContainer = styled("form")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.25),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
@@ -16,16 +16,14 @@ const SearchContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
     width: "auto",
   },
-}));
-
-const paperSxProps: SxProps<Theme> = {
-  p: "2px 6px",
+  padding: "2px 6px",
   display: "flex",
   boxShadow: "none",
-};
+}));
 
 const inputBaseSxProps: SxProps<Theme> = {
   flex: 1,
+  color: "inherit",
 };
 
 export const SearchBar = () => {
@@ -48,26 +46,19 @@ export const SearchBar = () => {
   ) => {
     const searchTerm = filterSearchTerm(event);
     if (!searchTerm) return;
-    navigate({ pathname: "/search-product", search: `?q=${searchTerm}`});
+    navigate({ pathname: "/search-product", search: `?q=${searchTerm}` });
   };
 
   return (
-    <SearchContainer>
-      <Paper
-        component="form"
-        onSubmit={navigateToSearchResult}
-        sx={paperSxProps}
-        ref={formRef}
-      >
-        <InputBase
-          sx={inputBaseSxProps}
-          placeholder="Search Products"
-          name="input-search"
-        />
-        <IconButton type="submit" aria-label="search">
-          <SearchIcon />
-        </IconButton>
-      </Paper>
+    <SearchContainer onSubmit={navigateToSearchResult} ref={formRef}>
+      <InputBase
+        sx={inputBaseSxProps}
+        placeholder="Search Products"
+        name="input-search"
+      />
+      <IconButton type="submit" aria-label="search">
+        <SearchIcon />
+      </IconButton>
     </SearchContainer>
   );
 };

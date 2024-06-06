@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SideDrawer from "./drawerList";
 import AccountMenu from "./accountMenu";
-import { lightBlue } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
@@ -25,8 +24,8 @@ export function Navbar() {
   const menuId = "primary-search-account-menu";
 
   const appBarSxProps: SxProps<Theme> = {
-    backgroundColor: lightBlue[100],
-    boxShadow: "rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px",
+    backgroundColor: "white",
+    boxShadow: "0px 0px 0px 1px rgb(140 140 140/.2)",
     color: "black",
   };
 
