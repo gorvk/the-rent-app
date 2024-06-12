@@ -16,9 +16,50 @@
 
 * An user-centric interface that promotes trust and facilitates transactions for both businesses and customers.
 
+---
 
 ### Tech Stack -
 
 * Frontend - React (18.3.1)
 * Backend - Go (1.22.1), PostgreSQL (16.2)
-* Deployment - Digital Ocean
+* Others - Docker
+
+---
+
+### Setup - 
+
+* #### Prerequisite 
+    * [Docker](https://docs.docker.com/get-docker/)
+    * [Node](https://nodejs.org/en/download/package-manager)
+
+* #### Starting the server
+    * Navigate to server folder 
+    * Run the following command to build and start postgres container in detach mode
+        ```bash
+        docker compose up rent_db -d
+        ```
+
+    * Set DB_MIGRATION_FLAG to Y in .env
+    * Run the following command to build and start golang container in detach mode for db migration
+        ```bash
+        docker compose up rent_api -d
+        ```
+
+    * Set DB_MIGRATION_FLAG to N in .env
+    * Run the following command to restart golang container in detach mode for running the API
+        ```bash
+        docker compose up rent_api -d
+        ```
+
+* #### Starting the client
+
+    * Navigate to client folder
+    * Run the following command to install all dependencies
+        ```bash
+        npm install
+        ```
+
+    * Run the following command to run the react client
+        ```bash
+        npm start
+        ```
