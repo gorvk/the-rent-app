@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -29,7 +28,6 @@ func GetCurrentUser(w http.ResponseWriter, r *http.Request) {
 	claims := token.Claims.(*jwt.RegisteredClaims)
 	rows, err := models.GetUserByEmail(claims.Issuer)
 	if err != nil {
-		fmt.Println(claims.Issuer)
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusInternalServerError)
 		return
 	}
@@ -47,6 +45,11 @@ func GetCurrentUser(w http.ResponseWriter, r *http.Request) {
 			&user.IsShopEnabled,
 			&user.AccountPassword,
 		)
+	}
+
+	if user.Id == 0 {
+		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusInternalServerError)
+		return
 	}
 
 	var response customTypes.RESPONSE_PARAMETERS
