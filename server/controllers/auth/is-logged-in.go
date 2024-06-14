@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -31,7 +32,6 @@ func GetCurrentUser(w http.ResponseWriter, r *http.Request) {
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusInternalServerError)
 		return
 	}
-
 	user := customTypes.User{}
 	defer rows.Close()
 	for rows.Next() {
@@ -48,7 +48,8 @@ func GetCurrentUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if user.Id == 0 {
-		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusInternalServerError)
+		err := fmt.Errorf(constants.ERROR_DB_UNABLE_TO_GET_RECORD)
+		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusUnauthorized)
 		return
 	}
 

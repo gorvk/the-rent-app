@@ -51,6 +51,8 @@ CREATE TABLE IF NOT EXISTS Orders (
     FOREIGN KEY (shop_id) REFERENCES Shops(id)
 );
 
+CREATE EXTENSION pg_trgm;
+
 CREATE MATERIALIZED VIEW IF NOT EXISTS public.search_products_view TABLESPACE pg_default AS
     SELECT 
         product_name,
@@ -71,3 +73,4 @@ CREATE INDEX IF NOT EXISTS search_products_view_product_name ON search_products_
         search_products_view.product_name || search_products_view.product_description || search_products_view.product_type || search_products_view.city
     )
 );
+

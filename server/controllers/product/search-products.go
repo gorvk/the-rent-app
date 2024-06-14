@@ -65,7 +65,7 @@ func SearchProducts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var response customTypes.RESPONSE_PARAMETERS
-	if products[0].Similarity == "0" && products[0].RankProductName == "0" {
+	if len(products) > 0 && products[0].Similarity == "0" && products[0].RankProductName == "0" {
 		var r = [0]customTypes.GET_SEARCHED_PRODUCTS_OUTPUT{}
 		response.Result = r
 	} else {

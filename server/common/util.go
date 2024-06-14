@@ -15,8 +15,13 @@ import (
 
 func HandleDbError(err error, w http.ResponseWriter, friendlyMessage string, statusCode int) {
 	if err != nil {
-		pqErr, _ := err.(*pq.Error)
-		msg := fmt.Sprintf("PostgreSQL Error: %q - %q", friendlyMessage, pqErr.Message)
+		var msg string
+		pqErr, isPqErr := err.(*pq.Error)
+		if isPqErr {
+			msg = fmt.Sprintf("PostgreSQL Error: %q - %q", friendlyMessage, pqErr.Message)
+		} else {
+			msg = fmt.Sprintf("PostgreSQL Error: %q", friendlyMessage)
+		}
 		data, _ := ConstructResponse(false, msg)
 		http.Error(w, string(data), statusCode)
 	}

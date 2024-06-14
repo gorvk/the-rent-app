@@ -13,7 +13,6 @@ func GetUserByEmail(email string) (*sql.Rows, error) {
 		return nil, nil
 	}
 	query := fmt.Sprintf("SELECT * FROM Users WHERE email = '%v';", email)
-	fmt.Println(query)
 	rows, err := db.Query(query)
 	return rows, err
 }
