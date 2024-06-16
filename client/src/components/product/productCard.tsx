@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import { IProductCard } from "../../interfaces/models";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
-import { PropsWithChildren, ReactNode } from "react";
 
 const ProductCard = (props: { product: IProductCard }) => {
   const { product } = props;
@@ -22,7 +21,7 @@ const ProductCard = (props: { product: IProductCard }) => {
   };
 
   const navigateToProductDetails = () => {
-    const url = `/product?i=${product.productName}`;
+    const url = `/product?i=${product.productId}`;
     navigate(url);
   };
 
@@ -46,7 +45,7 @@ const ProductCard = (props: { product: IProductCard }) => {
         component="img"
         height="194"
         width="194"
-        image="https://5.imimg.com/data5/SELLER/Default/2021/2/LZ/TT/JX/122336/primo-plastic-air-cooler-1000x1000.jpg"
+        image="https://m.media-amazon.com/images/I/71msFUl565L._SL1500_.jpg"
         alt="Paella dish"
       />
       <Divider />

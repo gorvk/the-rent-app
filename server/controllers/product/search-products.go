@@ -47,6 +47,7 @@ func SearchProducts(w http.ResponseWriter, r *http.Request) {
 	for rows.Next() {
 		row := customTypes.GET_SEARCHED_PRODUCTS_OUTPUT{}
 		rows.Scan(
+			&row.ProductId,
 			&row.ProductName,
 			&row.ProductType,
 			&row.ProductCondition,

@@ -51,10 +51,11 @@ CREATE TABLE IF NOT EXISTS Orders (
     FOREIGN KEY (shop_id) REFERENCES Shops(id)
 );
 
-CREATE EXTENSION pg_trgm;
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS public.search_products_view TABLESPACE pg_default AS
     SELECT 
+        products.id product_id,
         product_name,
         products.product_type,
         products.product_condition,
@@ -69,8 +70,31 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS public.search_products_view TABLESPACE pg
 
 CREATE INDEX IF NOT EXISTS search_products_view_product_name ON search_products_view USING GIN (
     to_tsvector(
-        'english',
+        'english'::regconfig,
         search_products_view.product_name || search_products_view.product_description || search_products_view.product_type || search_products_view.city
     )
 );
 
+CREATE MATERIALIZED VIEW IF NOT EXISTS public.product_detail_view TABLESPACE pg_default AS
+    SELECT 
+        products.id products_id,
+        products.product_name,
+        products.product_type,
+        products.product_condition,
+        products.price,
+        products.original_purchased_date,
+        products.original_purchaising_reciept_no,
+        products.product_description,
+        shops.id shop_id,
+        shops.shop_name,
+        shops.city,
+        shops.country,
+        shops.email,
+        shops.phone_number,
+        shops.map_location,
+        shops.shop_type,
+        shops.shop_description
+    FROM products
+        LEFT JOIN shops ON products.shop_id = shops.id;
+
+CREATE INDEX IF NOT EXISTS product_detail_view_id ON product_detail_view (products_id);

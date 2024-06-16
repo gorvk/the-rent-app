@@ -46,3 +46,7 @@ export interface ICreateProductInput {
     originalPurchaisingRecieptNo: string,
     productDescription: string,
 }
+
+export interface IGetProductInput {
+    id: number
+}

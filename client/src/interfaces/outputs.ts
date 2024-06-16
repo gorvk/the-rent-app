@@ -24,3 +24,8 @@ export interface IGetCurrentShopProductOutput {
     isSuccess: boolean,
     result: IProductCard[]
 }
+
+export interface IGetProductOutput {
+    isSuccess: boolean,
+    result: IProduct
+}

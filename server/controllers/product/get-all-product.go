@@ -30,6 +30,7 @@ func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 	for rows.Next() {
 		row := customTypes.SearchProductView{}
 		rows.Scan(
+			&row.ProductId,
 			&row.ProductName,
 			&row.ProductType,
 			&row.ProductCondition,

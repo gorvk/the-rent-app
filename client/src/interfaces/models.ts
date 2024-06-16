@@ -10,13 +10,18 @@ export interface IUser {
 }
 
 export interface IProduct {
+    productId: number,
+    shopId: number,
     productName: string,
     productType: string,
     productCondition: string,
+    productDescription: string,
     price: string,
+    shopName: string,
+    city: string,
+    country: string,
     originalPurchasedDate: string,
     originalPurchaisingRecieptNo: string,
-    productDescription: string,
 }
 
 export interface IShop {
@@ -30,6 +35,7 @@ export interface IShop {
 }
 
 export interface IProductCard {
+    productId: number,
     productName: string,
     productType: string,
     productCondition: string,

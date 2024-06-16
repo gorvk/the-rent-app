@@ -37,6 +37,7 @@ type Product struct {
 }
 
 type SearchProductView struct {
+	ProductId          int    `db:"product_id" json:"productId"`
 	ShopId             int    `db:"shop_id" json:"shopId"`
 	ProductName        string `db:"product_name" json:"productName"`
 	ProductType        string `db:"product_type" json:"productType"`

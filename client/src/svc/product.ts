@@ -1,5 +1,5 @@
-import { ICreateProductInput, ISearchProductsInput } from "../interfaces/inputs";
-import { ICommonOutput, IGetAllProductsOutput, IGetCurrentShopProductOutput, IGetSearchedProductsOutput } from "../interfaces/outputs";
+import { ICreateProductInput, IGetProductInput, ISearchProductsInput } from "../interfaces/inputs";
+import { ICommonOutput, IGetAllProductsOutput, IGetCurrentShopProductOutput, IGetProductOutput, IGetSearchedProductsOutput } from "../interfaces/outputs";
 import { getMethodGetHeader, getMethodPostHeader } from "../utils/https";
 import { API_URL } from "../utils/constants";
 
@@ -34,5 +34,13 @@ export const GetCurrentShopProductApi = async (): Promise<IGetCurrentShopProduct
     const requestInit: RequestInit | undefined = getMethodGetHeader();
     const response: Response = await fetch(baseUrl + url, requestInit)
     const json: IGetCurrentShopProductOutput = await response.json()
+    return json;
+}
+
+export const getProduct = async (payload: IGetProductInput): Promise<IGetProductOutput> => {
+    const url: string = "/get-product";
+    const requestInit: RequestInit | undefined = getMethodPostHeader(payload);
+    const response: Response = await fetch(baseUrl + url, requestInit)
+    const json: IGetProductOutput = await response.json()
     return json;
 }

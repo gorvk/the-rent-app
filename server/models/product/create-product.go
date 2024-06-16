@@ -25,7 +25,6 @@ func CreateProduct(product customTypes.CREATE_PRODUCT_INPUT, shopId int) (sql.Re
 			product_description
 		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
 	`)
-
 	if err != nil {
 		return nil, err
 	}
@@ -41,22 +40,14 @@ func CreateProduct(product customTypes.CREATE_PRODUCT_INPUT, shopId int) (sql.Re
 		product.OriginalPurchaisingRecieptNo,
 		product.ProductDescription,
 	)
-
 	if err != nil {
 		return nil, err
 	}
 
-	stmt, err = db.Prepare(`REFRESH MATERIALIZED VIEW search_products_view;`)
-
+	err = RefreshProductViews()
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = stmt.Exec()
-
-	if err != nil {
-		return nil, err
-	}
-
-	return rows, err
+	return rows, nil
 }

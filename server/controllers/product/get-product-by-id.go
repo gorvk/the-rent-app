@@ -14,7 +14,7 @@ import (
 func GetProductById(w http.ResponseWriter, r *http.Request) {
 
 	var err error
-	err = common.CheckHttpResponseType(w, r, http.MethodDelete)
+	err = common.CheckHttpResponseType(w, r, http.MethodPost)
 	if err != nil {
 		return
 	}
@@ -37,20 +37,27 @@ func GetProductById(w http.ResponseWriter, r *http.Request) {
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusInternalServerError)
 		return
 	}
-
-	product := customTypes.Product{}
+	product := customTypes.GET_PRODUCT_BY_ID_OUTPUT{}
 	defer rows.Close()
 	for rows.Next() {
 		rows.Scan(
 			&product.Id,
 			&product.ProductName,
-			&product.ShopId,
 			&product.ProductType,
 			&product.ProductCondition,
 			&product.Price,
 			&product.OriginalPurchasedDate,
 			&product.OriginalPurchaisingRecieptNo,
 			&product.ProductDescription,
+			&product.ShopId,
+			&product.ShopName,
+			&product.City,
+			&product.Country,
+			&product.Email,
+			&product.PhoneNumber,
+			&product.MapLocation,
+			&product.ShopType,
+			&product.ShopDescription,
 		)
 	}
 
