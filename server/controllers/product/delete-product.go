@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 
@@ -41,7 +40,6 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if input.Id == 0 {
-		err := fmt.Errorf(constants.ERROR_DB_UNABLE_TO_DELETE_RECORD)
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_DELETE_RECORD, http.StatusInternalServerError)
 		return
 	}
@@ -68,7 +66,6 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if shop.Id == 0 {
-		err := fmt.Errorf(constants.ERROR_DB_UNABLE_TO_DELETE_RECORD)
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_DELETE_RECORD, http.StatusInternalServerError)
 		return
 	}

@@ -43,7 +43,10 @@ const DetailsSections = (props: { product: IProduct }) => {
   return (
     <div style={containerCSSProperties}>
       <Fields product={product} />
-      <RentNowButton productId={product.productId} />
+      <RentNowButton
+        productId={product.productId}
+        quantity={product.quantity}
+      />
     </div>
   );
 };
@@ -82,6 +85,10 @@ const Fields = (props: { product: IProduct }) => {
       <ProductDetailFields
         label="Original Purchaising Reciept No:"
         content={product.originalPurchaisingRecieptNo || ""}
+      />
+      <ProductDetailFields
+        label="Available Quantity:"
+        content={product.quantity?.toString() || ""}
       />
     </div>
   );
@@ -126,9 +133,9 @@ const ProductDetailFields = (props: {
   );
 };
 
-const RentNowButton = (props: { productId: number }) => {
+const RentNowButton = (props: { productId: number; quantity: number }) => {
   const navigate = useNavigate();
-  const { productId } = props;
+  const { productId, quantity } = props;
 
   const navigateToOrderConfirmation = () => {
     const url = `/order-confirmation?i=${productId}`;
@@ -138,7 +145,9 @@ const RentNowButton = (props: { productId: number }) => {
   return (
     <>
       <br />
-      <button onClick={navigateToOrderConfirmation}>Rent Now</button>
+      <button onClick={navigateToOrderConfirmation} disabled={quantity === 0}>
+        {quantity === 0 ? "Not Available" : "Rent Now"}
+      </button>
     </>
   );
 };

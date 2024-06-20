@@ -22,6 +22,7 @@ export interface IProduct {
     country: string,
     originalPurchasedDate: string,
     originalPurchaisingRecieptNo: string,
+    quantity: number,
 }
 
 export interface IShop {

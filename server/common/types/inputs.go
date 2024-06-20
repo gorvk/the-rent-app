@@ -54,6 +54,7 @@ type CREATE_PRODUCT_INPUT struct {
 	OriginalPurchasedDate        string `db:"original_purchased_date" json:"originalPurchasedDate"`
 	OriginalPurchaisingRecieptNo string `db:"original_purchaising_reciept_no" json:"originalPurchaisingRecieptNo"`
 	ProductDescription           string `db:"product_description" json:"productDescription"`
+	Quantity                     int    `db:"quantity" json:"quantity"`
 }
 
 type DELETE_PRODUCT_INPUT struct {
@@ -69,13 +70,12 @@ type SEARCH_PRODUCTS_INPUT struct {
 }
 
 type PLACE_ORDER_INPUT struct {
-	FromMapLocation     string `db:"from_map_location" json:"fromMapLocation"`
+	FromMapLocation     string `db:"from_map_location" json:"-"`
 	ToMapLocation       string `db:"to_map_location" json:"toMapLocation"`
-	LastStopMapLocation string `db:"last_stop_map_location" json:"lastStopMapLocation"`
-	OrderStatus         string `db:"order_status" json:"orderStatus"`
-	PaymentStatus       string `db:"payment_status" json:"paymentStatus"`
+	LastStopMapLocation string `db:"last_stop_map_location" json:"-"`
+	OrderStatus         string `db:"order_status" json:"-"`
+	PaymentStatus       string `db:"payment_status" json:"-"`
 	ProductId           int    `db:"product_id" json:"productId"`
-	BuyerId             int    `db:"buyer_id" json:"buyerId"`
-	ShopId              int    `db:"shop_id" json:"shopId"`
+	BuyerId             int    `db:"buyer_id" json:"-"`
 	Quantity            int    `db:"quantity" json:"quantity"`
 }

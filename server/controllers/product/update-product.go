@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 
@@ -62,7 +61,6 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if shop.OwnerId != user.Id {
-		err := fmt.Errorf(constants.ERROR_HTTP_ACCESS_DENIED)
 		common.HandleDbError(err, w, constants.ERROR_HTTP_ACCESS_DENIED, http.StatusForbidden)
 		return
 	}

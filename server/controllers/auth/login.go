@@ -38,7 +38,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if payload.Email == "" || payload.AccountPassword == "" {
-		err := fmt.Errorf(constants.ERROR_HTTP_INVALID_REQUEST_BODY)
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_INVALID_REQUEST_BODY, http.StatusBadRequest)
 		return
 	}
@@ -66,7 +65,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(userRow.Email) == 0 || userRow.Id == 0 {
-		err := fmt.Errorf(constants.ERROR_HTTP_INVALID_USER)
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_INVALID_USER, http.StatusBadRequest)
 		return
 	}
@@ -74,7 +72,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	inputPassword := []byte(payload.AccountPassword)
 	err = bcrypt.CompareHashAndPassword(bytePassword, inputPassword)
 	if err != nil {
-		err := fmt.Errorf(constants.ERROR_HTTP_INCORRECT_PASSWORD)
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_INCORRECT_PASSWORD, http.StatusBadRequest)
 		return
 	}

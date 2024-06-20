@@ -17,9 +17,8 @@ func CreateOrder(order customTypes.PLACE_ORDER_INPUT) error {
 			payment_status,
 			product_id,
 			buyer_id,
-			shop_id,
 			quantity
-		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
 	`)
 	if err != nil {
 		return err
@@ -34,7 +33,6 @@ func CreateOrder(order customTypes.PLACE_ORDER_INPUT) error {
 		order.PaymentStatus,
 		order.ProductId,
 		order.BuyerId,
-		order.ShopId,
 		order.Quantity,
 	)
 	if err != nil {

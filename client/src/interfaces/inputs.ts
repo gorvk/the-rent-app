@@ -50,3 +50,9 @@ export interface ICreateProductInput {
 export interface IGetProductInput {
     id: number
 }
+
+export interface IPlaceOrderInput {
+    toMapLocation: string,
+    productId: number,
+    quantity: number
+}

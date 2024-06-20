@@ -17,8 +17,9 @@ func UpdateProduct(product customTypes.Product) error {
 			price = $5, 
 			original_purchased_date = $6, 
 			original_purchaising_reciept_no = $7, 
-			product_description = $8 
-		WHERE id = $9;
+			product_description = $8,
+			quantity = $9
+		WHERE id = $10;
 	`)
 
 	if err != nil {
@@ -35,6 +36,7 @@ func UpdateProduct(product customTypes.Product) error {
 		product.OriginalPurchasedDate,
 		product.OriginalPurchaisingRecieptNo,
 		product.ProductDescription,
+		product.Quantity,
 		product.Id,
 	)
 	if err != nil {

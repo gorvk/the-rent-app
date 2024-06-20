@@ -34,6 +34,7 @@ type Product struct {
 	OriginalPurchasedDate        string `db:"original_purchased_date" json:"originalPurchasedDate"`
 	OriginalPurchaisingRecieptNo string `db:"original_purchaising_reciept_no" json:"originalPurchaisingRecieptNo"`
 	ProductDescription           string `db:"product_description" json:"productDescription"`
+	Quantity                     int    `db:"quantity" json:"quantity"`
 }
 
 type SearchProductView struct {
@@ -58,6 +59,5 @@ type Order struct {
 	PaymentStatus       string `db:"payment_status" json:"paymentStatus"`
 	ProductId           int    `db:"product_id" json:"productId"`
 	BuyerId             int    `db:"buyer_id" json:"buyerId"`
-	ShopId              int    `db:"shop_id" json:"shopId"`
 	Quantity            int    `db:"quantity" json:"quantity"`
 }

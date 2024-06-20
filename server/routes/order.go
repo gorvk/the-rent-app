@@ -7,5 +7,5 @@ import (
 )
 
 func init() {
-	http.HandleFunc("/api/order/create-order", controllers.CreateOrder)
+	http.HandleFunc("/api/order/create", controllers.CreateOrder)
 }

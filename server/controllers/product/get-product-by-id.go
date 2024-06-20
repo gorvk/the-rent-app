@@ -49,6 +49,7 @@ func GetProductById(w http.ResponseWriter, r *http.Request) {
 			&product.OriginalPurchasedDate,
 			&product.OriginalPurchaisingRecieptNo,
 			&product.ProductDescription,
+			&product.Quantity,
 			&product.ShopId,
 			&product.ShopName,
 			&product.City,

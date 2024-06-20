@@ -36,13 +36,15 @@ func CheckHttpResponseType(w http.ResponseWriter, r *http.Request, methodType st
 }
 
 func HandleHttpError(err error, w http.ResponseWriter, friendlyMessage string, statusCode int) error {
+	msg := fmt.Sprintf("Http Error: %q", friendlyMessage)
+	data, _ := ConstructResponse(false, msg)
+	http.Error(w, string(data), statusCode)
 	if err != nil {
-		msg := fmt.Sprintf("Http Error: %q", friendlyMessage)
-		data, _ := ConstructResponse(false, msg)
-		http.Error(w, string(data), statusCode)
 		return err
+	} else {
+		customErr := fmt.Errorf(friendlyMessage, statusCode)
+		return customErr
 	}
-	return nil
 }
 
 func IsAuthenticated(r *http.Request) (*customTypes.User, error) {

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 
@@ -32,11 +33,8 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// check if user placing the order is actual user that is loggedin
-	if user.Id != input.BuyerId {
-		common.HandleHttpError(err, w, constants.ERROR_HTTP_UNAUTHORIZED, http.StatusBadRequest)
-		return
-	}
+	// assiging logged is userId as BuyerId
+	input.BuyerId = user.Id
 
 	rows, err := productModels.GetProductById(input.ProductId)
 	if err != nil {
@@ -56,6 +54,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 			&product.OriginalPurchasedDate,
 			&product.OriginalPurchaisingRecieptNo,
 			&product.ProductDescription,
+			&product.Quantity,
 			&product.ShopId,
 			&product.ShopName,
 			&product.City,
@@ -68,16 +67,22 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	// check if product is valid or not using ProductId
-	// check if quantity in input is <= quantity of product
-	if product.Id != 0 || product.Id != input.ProductId || product.Quantity != input.Quantity {
-		common.HandleHttpError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusBadRequest)
+	// check if product is valid
+	// check if quantity is valid
+	if product.Id == 0 || product.Id != input.ProductId || product.Quantity == 0 || product.Quantity != input.Quantity {
+		common.HandleHttpError(err, w, constants.ERROR_HTTP_BAD_REQUEST, http.StatusBadRequest)
 		return
 	}
+
+	input.FromMapLocation = product.MapLocation
+	input.LastStopMapLocation = product.MapLocation
+	input.OrderStatus = "In prog"
+	input.PaymentStatus = "Success"
 
 	// create a record for placed order in orders table using input
 	err = orderModels.CreateOrder(input)
 	if err != nil {
+		fmt.Println(err)
 		common.HandleHttpError(err, w, constants.ERROR_DB_UNABLE_TO_CREATE_RECORD, http.StatusInternalServerError)
 		return
 	}
@@ -100,4 +105,12 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		common.HandleHttpError(err, w, constants.ERROR_DB_UNABLE_TO_UPDATE_RECORD, http.StatusInternalServerError)
 		return
 	}
+
+	data, err := common.ConstructResponse(true, nil)
+	if err != nil {
+		common.HandleHttpError(err, w, constants.ERROR_HTTP_UNABLE_TO_PARSE_RESPONSE, http.StatusInternalServerError)
+		return
+	}
+
+	w.Write(data)
 }

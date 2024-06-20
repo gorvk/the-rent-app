@@ -39,6 +39,8 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println(input.ProductName)
+
 	rows, err := shopModel.GetShopByOwnerId(user.Id)
 	if err != nil {
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_GET_RECORD, http.StatusInternalServerError)
@@ -63,7 +65,6 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if shop.Id == 0 || user.Id == 0 || input.ProductName == "" {
-		err := fmt.Errorf(constants.ERROR_DB_UNABLE_TO_CREATE_RECORD)
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_INVALID_REQUEST_BODY, http.StatusBadRequest)
 		return
 	}

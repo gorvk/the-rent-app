@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 
@@ -40,7 +39,6 @@ func UpdateShop(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if input.Email == "" || user.Id == 0 {
-		err := fmt.Errorf(constants.ERROR_HTTP_INVALID_REQUEST_BODY)
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_INVALID_REQUEST_BODY, http.StatusBadRequest)
 		return
 	}

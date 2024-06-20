@@ -12,7 +12,7 @@ func GetProductById(id int) (*sql.Rows, error) {
 	if db == nil {
 		return nil, nil
 	}
-	query := fmt.Sprintf("SELECT * FROM product_detail_view WHERE products_id = %v", id)
+	query := fmt.Sprintf("SELECT * FROM product_detail_view WHERE products_id = %v;", id)
 	rows, err := db.Query(query)
 	return rows, err
 }
