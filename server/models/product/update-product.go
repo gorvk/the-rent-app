@@ -1,17 +1,12 @@
 package models
 
 import (
-	"database/sql"
-
 	customTypes "github.com/gorvk/rent-app/api-services/common/types"
 	"github.com/gorvk/rent-app/api-services/initializers"
 )
 
-func UpdateProduct(product customTypes.Product) (sql.Result, error) {
+func UpdateProduct(product customTypes.Product) error {
 	db := initializers.GetDBInstance()
-	if db == nil {
-		return nil, nil
-	}
 
 	stmt, err := db.Prepare(`
 		UPDATE Products SET 
@@ -27,11 +22,11 @@ func UpdateProduct(product customTypes.Product) (sql.Result, error) {
 	`)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	defer stmt.Close()
-	rows, err := stmt.Exec(
+	_, err = stmt.Exec(
 		product.ProductName,
 		product.ShopId,
 		product.ProductType,
@@ -42,6 +37,14 @@ func UpdateProduct(product customTypes.Product) (sql.Result, error) {
 		product.ProductDescription,
 		product.Id,
 	)
+	if err != nil {
+		return err
+	}
 
-	return rows, err
+	err = RefreshProductViews()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

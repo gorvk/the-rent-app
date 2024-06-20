@@ -48,3 +48,16 @@ type SearchProductView struct {
 	City               string `db:"city" json:"city"`
 	Country            string `db:"country" json:"country"`
 }
+
+type Order struct {
+	Id                  string `db:"id" json:"id"`
+	FromMapLocation     string `db:"from_map_location" json:"fromMapLocation"`
+	ToMapLocation       string `db:"to_map_location" json:"toMapLocation"`
+	LastStopMapLocation string `db:"last_stop_map_location" json:"lastStopMapLocation"`
+	OrderStatus         string `db:"order_status" json:"orderStatus"`
+	PaymentStatus       string `db:"payment_status" json:"paymentStatus"`
+	ProductId           int    `db:"product_id" json:"productId"`
+	BuyerId             int    `db:"buyer_id" json:"buyerId"`
+	ShopId              int    `db:"shop_id" json:"shopId"`
+	Quantity            int    `db:"quantity" json:"quantity"`
+}

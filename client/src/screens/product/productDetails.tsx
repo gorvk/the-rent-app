@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { getProduct } from "../svc/product";
-import { IGetProductInput } from "../interfaces/inputs";
-import { IProduct } from "../interfaces/models";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getProduct } from "../../svc/product";
+import { IGetProductInput } from "../../interfaces/inputs";
+import { IProduct } from "../../interfaces/models";
 import { Divider } from "@mui/material";
 
 const ProductDetails = () => {
@@ -31,16 +31,27 @@ const ProductDetails = () => {
   return (
     <div style={pageContainerStyleProps}>
       <ProductThumbnail src="https://m.media-amazon.com/images/I/71msFUl565L._SL1500_.jpg" />
+      <DetailsSections product={product} />
+    </div>
+  );
+};
+
+const DetailsSections = (props: { product: IProduct }) => {
+  const { product } = props;
+  const containerCSSProperties: React.CSSProperties = { width: "60%" };
+
+  return (
+    <div style={containerCSSProperties}>
       <Fields product={product} />
+      <RentNowButton productId={product.productId} />
     </div>
   );
 };
 
 const Fields = (props: { product: IProduct }) => {
   const { product } = props;
-  const containerCSSProperties: React.CSSProperties = { width: "60%" };
   return (
-    <div style={containerCSSProperties}>
+    <div>
       <ProductHeader
         productName={product.productName || ""}
         shopName={product.shopName || ""}
@@ -111,6 +122,23 @@ const ProductDetailFields = (props: {
         <b>{label}</b> <br />
         <div style={style}>{content}</div>
       </div>
+    </>
+  );
+};
+
+const RentNowButton = (props: { productId: number }) => {
+  const navigate = useNavigate();
+  const { productId } = props;
+
+  const navigateToOrderConfirmation = () => {
+    const url = `/order-confirmation?i=${productId}`;
+    navigate(url);
+  };
+
+  return (
+    <>
+      <br />
+      <button onClick={navigateToOrderConfirmation}>Rent Now</button>
     </>
   );
 };

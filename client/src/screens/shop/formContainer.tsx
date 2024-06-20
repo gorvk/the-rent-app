@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../state/store";
-import { IUser } from "../interfaces/models";
-import { ShopForm } from "../components/shop/shopForm";
-import { ProductForm } from "../components/shop/productForm";
+import { RootState } from "../../state/store";
+import { IUser } from "../../interfaces/models";
+import { ShopForm } from "./shopForm";
+import { ProductForm } from "./productForm";
 
 const Shop = () => {
   const currentUser: IUser | null = useSelector((state: RootState) => {

@@ -10,7 +10,7 @@ import SideDrawer from "./drawerList";
 import AccountMenu from "./accountMenu";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../state/store";
+import { RootState } from "../state/store";
 import { SearchBar } from "./searchBar";
 
 export function Navbar() {

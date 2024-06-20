@@ -1,8 +1,8 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { logoutApi } from "../../svc/auth";
-import userSlice from "../../state/slices/userSlice";
-import { IUser } from "../../interfaces/models";
+import { logoutApi } from "../svc/auth";
+import userSlice from "../state/slices/userSlice";
+import { IUser } from "../interfaces/models";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

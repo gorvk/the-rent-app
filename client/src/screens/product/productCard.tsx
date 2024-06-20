@@ -25,7 +25,7 @@ const ProductCard = (props: { product: IProductCard }) => {
     navigate(url);
   };
 
-  const ProductCardTypography = (props: {children: string}) => {
+  const ProductCardTypography = (props: { children: string }) => {
     return (
       <Typography
         variant="body2"
@@ -51,16 +51,10 @@ const ProductCard = (props: { product: IProductCard }) => {
       <Divider />
       <CardHeader
         title={product.productName}
-        subheader={
-          <ProductCardTypography>
-            {subHeader}
-          </ProductCardTypography>
-        }
+        subheader={<ProductCardTypography>{subHeader}</ProductCardTypography>}
       />
       <CardContent>
-        <ProductCardTypography>
-          {product.city}
-        </ProductCardTypography>
+        <ProductCardTypography>{product.city}</ProductCardTypography>
         <ProductCardTypography>
           {product.productDescription}
         </ProductCardTypography>

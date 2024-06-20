@@ -1,16 +1,14 @@
 package models
 
 import (
-	"database/sql"
-
 	customTypes "github.com/gorvk/rent-app/api-services/common/types"
 	"github.com/gorvk/rent-app/api-services/initializers"
 )
 
-func CreateProduct(product customTypes.CREATE_PRODUCT_INPUT, shopId int) (sql.Result, error) {
+func CreateProduct(product customTypes.CREATE_PRODUCT_INPUT, shopId int) error {
 	db := initializers.GetDBInstance()
 	if db == nil {
-		return nil, nil
+		return nil
 	}
 
 	stmt, err := db.Prepare(`
@@ -26,11 +24,11 @@ func CreateProduct(product customTypes.CREATE_PRODUCT_INPUT, shopId int) (sql.Re
 		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
 	`)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	defer stmt.Close()
-	rows, err := stmt.Exec(
+	_, err = stmt.Exec(
 		product.ProductName,
 		shopId,
 		product.ProductType,
@@ -41,13 +39,13 @@ func CreateProduct(product customTypes.CREATE_PRODUCT_INPUT, shopId int) (sql.Re
 		product.ProductDescription,
 	)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	err = RefreshProductViews()
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return rows, nil
+	return nil
 }

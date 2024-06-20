@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/gorvk/rent-app/api-services/common"
 	"github.com/gorvk/rent-app/api-services/common/constants"
 	customTypes "github.com/gorvk/rent-app/api-services/common/types"
@@ -22,7 +21,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := common.IsAuthenticated(r)
+	user, err := common.IsAuthenticated(r)
 	if err != nil {
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_UNAUTHORIZED, http.StatusUnauthorized)
 		return
@@ -47,9 +46,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	claims := token.Claims.(*jwt.RegisteredClaims)
-	input.Email = strings.ToLower(claims.Issuer)
-
+	input.Email = strings.ToLower(user.Email)
 	_, err = models.UpdateUser(input)
 	if err != nil {
 		common.HandleDbError(err, w, constants.ERROR_DB_UNABLE_TO_CREATE_RECORD, http.StatusInternalServerError)

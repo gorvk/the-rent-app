@@ -11,10 +11,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import { isLoggedInApi, loginApi } from "../svc/auth";
-import { ILoginInput } from "../interfaces/inputs";
+import { isLoggedInApi, loginApi } from "../../svc/auth";
+import { ILoginInput } from "../../interfaces/inputs";
 import { useDispatch } from "react-redux";
-import userSlice from "../state/slices/userSlice";
+import userSlice from "../../state/slices/userSlice";
 
 const defaultTheme = createTheme();
 

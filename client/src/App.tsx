@@ -11,15 +11,16 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { Navbar } from "./components/navbar/navbar";
-import Register from "./screens/register";
+import { Navbar } from "./components/navbar";
+import Register from "./screens/auth/register";
 import userSlice from "./state/slices/userSlice";
 import { isLoggedInApi } from "./svc/auth";
-import Home from "./screens/home";
-import Login from "./screens/login";
-import Shop from "./screens/shop";
-import Product from "./screens/productDetails";
-import { SearchResult } from "./screens/searchResult";
+import Home from "./screens/home/home";
+import Login from "./screens/auth/login";
+import Shop from "./screens/shop/formContainer";
+import Product from "./screens/product/productDetails";
+import { SearchResult } from "./screens/home/searchResult";
+import OrderConfirmation from "./screens/order/orderConfirmation";
 
 const ProtectedRoute = (props: {
   isAuthenticated: boolean;
@@ -76,6 +77,16 @@ function App() {
           }
         >
           <Route path="/shop" element={<Shop />} />
+        </Route>
+        <Route
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirectTo="/login"
+            />
+          }
+        >
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
         </Route>
         <Route
           element={

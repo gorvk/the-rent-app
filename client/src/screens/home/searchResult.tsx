@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ProductsList } from "../components/product/productsList";
-import { ISearchProductsInput } from "../interfaces/inputs";
-import { IProductCard } from "../interfaces/models";
-import { getSearchedProductsApi } from "../svc/product";
+import { ProductsList } from "../product/productsList";
+import { ISearchProductsInput } from "../../interfaces/inputs";
+import { IProductCard } from "../../interfaces/models";
+import { getSearchedProductsApi } from "../../svc/product";
 import { useLocation } from "react-router-dom";
 
 export const SearchResult = () => {

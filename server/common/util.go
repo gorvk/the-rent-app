@@ -10,6 +10,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/gorvk/rent-app/api-services/common/constants"
 	customTypes "github.com/gorvk/rent-app/api-services/common/types"
+	models "github.com/gorvk/rent-app/api-services/models/user"
 	"github.com/lib/pq"
 )
 
@@ -44,7 +45,7 @@ func HandleHttpError(err error, w http.ResponseWriter, friendlyMessage string, s
 	return nil
 }
 
-func IsAuthenticated(r *http.Request) (*jwt.Token, error) {
+func IsAuthenticated(r *http.Request) (*customTypes.User, error) {
 	cookie, err := r.Cookie("rent_app_jwt")
 	if err != nil {
 		return nil, err
@@ -53,12 +54,36 @@ func IsAuthenticated(r *http.Request) (*jwt.Token, error) {
 	token, err := jwt.ParseWithClaims(cookie.Value, &jwt.RegisteredClaims{}, func(t *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("JWT_SINGING_KEY")), nil
 	})
-
 	if err != nil {
 		return nil, err
 	}
 
-	return token, err
+	claims := token.Claims.(*jwt.RegisteredClaims)
+	rows, err := models.GetUserByEmail(claims.Issuer)
+	if err != nil {
+		return nil, err
+	}
+
+	user := customTypes.User{}
+	defer rows.Close()
+	for rows.Next() {
+		rows.Scan(
+			&user.Id,
+			&user.FirstName,
+			&user.LastName,
+			&user.Email,
+			&user.PhoneNumber,
+			&user.UserAddress,
+			&user.IsShopEnabled,
+			&user.AccountPassword,
+		)
+	}
+	if user.Id == 0 {
+		err := fmt.Errorf(constants.ERROR_DB_UNABLE_TO_GET_RECORD)
+		return nil, err
+	}
+
+	return &user, nil
 }
 
 func ConstructResponse(isSuccess bool, result any) ([]byte, error) {

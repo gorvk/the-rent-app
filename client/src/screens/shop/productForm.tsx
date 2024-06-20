@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
-import { IProduct, IProductCard, IUser } from "../../interfaces/models";
-import { RootState } from "../../state/store";
+import { IProductCard } from "../../interfaces/models";
 import { ThemeProvider } from "@emotion/react";
 import {
   Container,

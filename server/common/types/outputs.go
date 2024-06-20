@@ -22,6 +22,7 @@ type GET_PRODUCT_BY_ID_OUTPUT struct {
 	OriginalPurchasedDate        string `db:"original_purchased_date" json:"originalPurchasedDate"`
 	OriginalPurchaisingRecieptNo string `db:"original_purchaising_reciept_no" json:"originalPurchaisingRecieptNo"`
 	ProductDescription           string `db:"product_description" json:"productDescription"`
+	Quantity                     int    `db:"quantity" json:"quantity"`
 	ShopId                       int    `db:"shop_id" json:"shopId"`
 	ShopName                     string `db:"shop_name" json:"shopName"`
 	City                         string `db:"city" json:"city"`

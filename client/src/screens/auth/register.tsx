@@ -9,8 +9,8 @@ import Container from "@mui/material/Container";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { IRegisterInput } from "../interfaces/inputs";
-import { registerApi } from "../svc/auth";
+import { IRegisterInput } from "../../interfaces/inputs";
+import { registerApi } from "../../svc/auth";
 
 const defaultTheme = createTheme();
 

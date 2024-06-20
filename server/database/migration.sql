@@ -25,14 +25,15 @@ CREATE TABLE IF NOT EXISTS Shops (
 
 CREATE TABLE IF NOT EXISTS Products(
     id SERIAL PRIMARY KEY,
-    product_name VARCHAR(100) NOT NULL,
+    product_name VARCHAR NOT NULL,
     shop_id SERIAL NOT NULL,
-    product_type VARCHAR(100),
-    product_condition VARCHAR(20),
-    price MONEY,
-    original_purchased_date DATE,
-    original_purchaising_reciept_no VARCHAR,
-    product_description VARCHAR(1000),
+    product_type VARCHAR NOT NULL,
+    product_condition VARCHAR NOT NULL,
+    price MONEY NOT NULL,
+    original_purchased_date DATE NOT NULL,
+    original_purchaising_reciept_no VARCHAR NOT NULL,
+    product_description VARCHAR NOT NULL,
+    quantity INTEGER NOT NULL,
     FOREIGN KEY (shop_id) REFERENCES Shops(id)
 );
 
@@ -46,6 +47,7 @@ CREATE TABLE IF NOT EXISTS Orders (
     product_id SERIAL NOT NULL,
     buyer_id SERIAL NOT NULL,
     shop_id SERIAL NOT NULL,
+    quantity INTEGER NOT NULL,
     FOREIGN KEY (product_id) REFERENCES Products(id),
     FOREIGN KEY (buyer_id) REFERENCES Users(id),
     FOREIGN KEY (shop_id) REFERENCES Shops(id)
@@ -85,6 +87,7 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS public.product_detail_view TABLESPACE pg_
         products.original_purchased_date,
         products.original_purchaising_reciept_no,
         products.product_description,
+        products.quantity,
         shops.id shop_id,
         shops.shop_name,
         shops.city,

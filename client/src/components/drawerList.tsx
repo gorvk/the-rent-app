@@ -17,7 +17,7 @@ import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Home, Login } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../state/store";
+import { RootState } from "../state/store";
 
 interface DrawerItem {
   label: string;
