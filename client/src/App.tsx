@@ -20,7 +20,6 @@ import Login from "./screens/auth/login";
 import Shop from "./screens/shop/formContainer";
 import Product from "./screens/product/productDetails";
 import { SearchResult } from "./screens/home/searchResult";
-import OrderConfirmation from "./screens/order/orderConfirmation";
 
 const ProtectedRoute = (props: {
   isAuthenticated: boolean;
@@ -77,16 +76,6 @@ function App() {
           }
         >
           <Route path="/shop" element={<Shop />} />
-        </Route>
-        <Route
-          element={
-            <ProtectedRoute
-              isAuthenticated={isAuthenticated}
-              redirectTo="/login"
-            />
-          }
-        >
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
         </Route>
         <Route
           element={

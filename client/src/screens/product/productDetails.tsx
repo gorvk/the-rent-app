@@ -4,6 +4,7 @@ import { getProduct } from "../../svc/product";
 import { IGetProductInput } from "../../interfaces/inputs";
 import { IProduct } from "../../interfaces/models";
 import { Divider } from "@mui/material";
+import OrderConfirmation from "./orderConfirmation";
 
 const ProductDetails = () => {
   const { search } = useLocation();
@@ -28,11 +29,13 @@ const ProductDetails = () => {
     getProductDetail();
     // eslint-disable-next-line
   }, []);
-  return (
+  return product.productId ? (
     <div style={pageContainerStyleProps}>
       <ProductThumbnail src="https://m.media-amazon.com/images/I/71msFUl565L._SL1500_.jpg" />
       <DetailsSections product={product} />
     </div>
+  ) : (
+    <></>
   );
 };
 
@@ -43,10 +46,6 @@ const DetailsSections = (props: { product: IProduct }) => {
   return (
     <div style={containerCSSProperties}>
       <Fields product={product} />
-      <RentNowButton
-        productId={product.productId}
-        quantity={product.quantity}
-      />
     </div>
   );
 };
@@ -90,6 +89,10 @@ const Fields = (props: { product: IProduct }) => {
         label="Available Quantity:"
         content={product.quantity?.toString() || ""}
       />
+      <ProductDetailFields
+        label="Place your order:"
+        content={<OrderConfirmation productQuantity={product.quantity} />}
+      />
     </div>
   );
 };
@@ -110,7 +113,7 @@ const ProductHeader = (props: { productName: string; shopName: string }) => {
 const ProductThumbnail = (props: { src: string }) => {
   const { src } = props;
   return (
-    <div style={{ width: "30%", marginBlock: "auto" }}>
+    <div style={{ width: "30%" }}>
       <img width="100%" alt="product thumbnail" src={src} />
     </div>
   );
@@ -118,7 +121,7 @@ const ProductThumbnail = (props: { src: string }) => {
 
 const ProductDetailFields = (props: {
   label: string;
-  content: string;
+  content: JSX.Element | string;
   style?: React.CSSProperties;
 }) => {
   const { label, content, style } = props;
@@ -129,25 +132,6 @@ const ProductDetailFields = (props: {
         <b>{label}</b> <br />
         <div style={style}>{content}</div>
       </div>
-    </>
-  );
-};
-
-const RentNowButton = (props: { productId: number; quantity: number }) => {
-  const navigate = useNavigate();
-  const { productId, quantity } = props;
-
-  const navigateToOrderConfirmation = () => {
-    const url = `/order-confirmation?i=${productId}`;
-    navigate(url);
-  };
-
-  return (
-    <>
-      <br />
-      <button onClick={navigateToOrderConfirmation} disabled={quantity === 0}>
-        {quantity === 0 ? "Not Available" : "Rent Now"}
-      </button>
     </>
   );
 };

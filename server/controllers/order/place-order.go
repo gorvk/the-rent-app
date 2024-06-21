@@ -69,7 +69,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 
 	// check if product is valid
 	// check if quantity is valid
-	if product.Id == 0 || product.Id != input.ProductId || product.Quantity == 0 || product.Quantity != input.Quantity {
+	if product.Id == 0 || product.Id != input.ProductId || product.Quantity == 0 || input.Quantity > product.Quantity {
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_BAD_REQUEST, http.StatusBadRequest)
 		return
 	}

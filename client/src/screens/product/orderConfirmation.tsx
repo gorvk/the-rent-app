@@ -1,45 +1,55 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { createOrderApi } from "../../svc/order";
-import { ICreateProductInput, IPlaceOrderInput } from "../../interfaces/inputs";
+import { IPlaceOrderInput } from "../../interfaces/inputs";
 import { ThemeProvider } from "@emotion/react";
 import {
-  Dialog,
-  DialogContent,
   Container,
   CssBaseline,
   Box,
-  Avatar,
-  Typography,
   TextField,
   Button,
   createTheme,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
-import { createProductApi } from "../../svc/product";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import { preProcessFile } from "typescript";
 import { RootState } from "../../state/store";
 import { useSelector } from "react-redux";
 
-const OrderConfirmation = () => {
+const OrderConfirmation = (props: { productQuantity: number }) => {
+  const { productQuantity } = props;
   const { search } = useLocation();
   const [productId, setProductId] = useState<number>(0);
+  const [quantities, setQuantities] = useState<number[]>([]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(search);
     const productId = searchParams.get("i");
     if (productId) {
+      const filledQuantities = fillQuanities(productQuantity);
+      console.log(productQuantity);
+      setQuantities(filledQuantities);
       setProductId(parseInt(productId));
     }
   }, []);
 
-  return <Form productId={productId} />;
+  return <Form productId={productId} quantities={quantities} />;
 };
 
-const Form = (props: { productId: number }) => {
+const fillQuanities = (quantity: number) => {
+  const quantities: number[] = [];
+  for (let i = 0; i < quantity; i++) {
+    quantities.push(i + 1);
+  }
+  return quantities;
+};
+
+const Form = (props: { productId: number; quantities: number[] }) => {
   const currentUser = useSelector((state: RootState) => state.currentUser);
   const defaultTheme = createTheme();
-  const { productId } = props;
+  const { productId, quantities } = props;
   const placeOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
@@ -62,24 +72,22 @@ const Form = (props: { productId: number }) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        style={{ paddingLeft: 0, marginLeft: 0 }}
+      >
         <CssBaseline />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            marginBlock: 3,
+            alignItems: "left",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LocalShippingIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Fill order details
-          </Typography>
           <Box component="form" onSubmit={placeOrder} noValidate sx={{ mt: 1 }}>
             <TextField
+              disabled={quantities.length === 0}
               margin="normal"
               required
               fullWidth
@@ -88,22 +96,30 @@ const Form = (props: { productId: number }) => {
               type="text"
               id="delivery-address"
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="quantity"
-              label="Quantity"
-              type="number"
-              id="quantity"
-            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
+              <Select
+                disabled={quantities.length === 0}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Quantity"
+                name="quantity"
+              >
+                {quantities.map((quantity) => (
+                  <MenuItem key={quantity} value={quantity}>
+                    {quantity}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <Button
+              disabled={quantities.length === 0}
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Go to payment
+              {quantities.length === 0 ? "Out of stock" : "Go to payment"}
             </Button>
           </Box>
         </Box>
