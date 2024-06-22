@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getProduct } from "../../svc/product";
 import { IGetProductInput } from "../../interfaces/inputs";
 import { IProduct } from "../../interfaces/models";

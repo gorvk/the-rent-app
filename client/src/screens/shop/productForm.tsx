@@ -33,11 +33,14 @@ export const ProductForm = () => {
         setProductsList(response.result);
         handleClose();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     GetCurrentShopProduct();
+    // eslint-disable-next-line
   }, []);
 
   const cardCssProp: React.CSSProperties = {
@@ -102,7 +105,7 @@ export const ProductForm = () => {
 const Form = (props: {
   open: boolean;
   handleClose: () => void;
-  refreshProductsList: () => {};
+  refreshProductsList: () => Promise<void>;
 }) => {
   const { open, handleClose, refreshProductsList } = props;
 

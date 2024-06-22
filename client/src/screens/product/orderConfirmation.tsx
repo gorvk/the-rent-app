@@ -33,6 +33,7 @@ const OrderConfirmation = (props: { productQuantity: number }) => {
       setQuantities(filledQuantities);
       setProductId(parseInt(productId));
     }
+    // eslint-disable-next-line
   }, []);
 
   return <Form productId={productId} quantities={quantities} />;

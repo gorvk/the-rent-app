@@ -9,6 +9,7 @@ export const getMethodGetHeader = (): RequestInit | undefined => {
     }
 }
 
+// eslint-disable-next-line
 export const getMethodPostHeader = (payload: any): RequestInit | undefined => {
     return {
         headers: {
@@ -21,6 +22,7 @@ export const getMethodPostHeader = (payload: any): RequestInit | undefined => {
     }
 }
 
+// eslint-disable-next-line
 export const getMethodPutHeader = (payload: any): RequestInit | undefined => {
     return {
         headers: {

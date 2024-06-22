@@ -14,9 +14,8 @@ import {
   Avatar,
 } from "@mui/material";
 import Store from "@mui/icons-material/Store";
-import { ICreateShopInput, IUpdateUserInput } from "../../interfaces/inputs";
+import { ICreateShopInput } from "../../interfaces/inputs";
 import { createShopApi } from "../../svc/shop";
-import { updateUserApi } from "../../svc/user";
 import userSlice from "../../state/slices/userSlice";
 
 const defaultTheme = createTheme();
