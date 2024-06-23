@@ -45,6 +45,7 @@ export interface ICreateProductInput {
     originalPurchasedDate: string,
     originalPurchaisingRecieptNo: string,
     productDescription: string,
+    quantity: number,
 }
 
 export interface IGetProductInput {

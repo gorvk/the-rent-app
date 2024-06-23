@@ -125,6 +125,7 @@ const Form = (props: {
         originalPurchaisingRecieptNo:
           data.get("originalPurchaisingRecieptNo")?.toString() || "",
         productDescription: data.get("productDescription")?.toString() || "",
+        quantity: parseInt(data.get("quantity")?.toString() || "1")
       };
       const response = await createProductApi(payload);
       if (response.isSuccess) {
@@ -224,6 +225,15 @@ const Form = (props: {
                   label="Product Description"
                   type="text"
                   id="product-description"
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="quantity"
+                  label="Quantity"
+                  type="number"
+                  id="quantity"
                 />
                 <Button
                   type="submit"
