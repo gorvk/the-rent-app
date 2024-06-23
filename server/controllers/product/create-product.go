@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 
@@ -38,8 +37,6 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_INVALID_REQUEST_BODY, http.StatusBadRequest)
 		return
 	}
-
-	fmt.Println(input.ProductName)
 
 	rows, err := shopModel.GetShopByOwnerId(user.Id)
 	if err != nil {

@@ -86,7 +86,6 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		common.HandleHttpError(err, w, constants.ERROR_DB_UNABLE_TO_CREATE_RECORD, http.StatusInternalServerError)
 		return
 	}
-
 	// decrease the count of product's quantity using ProductId in Products detail
 	product.Quantity = product.Quantity - input.Quantity
 	updatedProduct := customTypes.Product{
@@ -99,6 +98,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		Price:                        product.Price,
 		OriginalPurchasedDate:        product.OriginalPurchasedDate,
 		OriginalPurchaisingRecieptNo: product.OriginalPurchaisingRecieptNo,
+		Quantity:                     product.Quantity,
 	}
 	err = productModels.UpdateProduct(updatedProduct)
 	if err != nil {
