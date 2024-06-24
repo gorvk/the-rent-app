@@ -9,7 +9,6 @@ import {
   Box,
   TextField,
   Button,
-  createTheme,
   FormControl,
   InputLabel,
   MenuItem,
@@ -49,7 +48,6 @@ const fillQuanities = (quantity: number) => {
 
 const Form = (props: { productId: number; quantities: number[] }) => {
   const currentUser = useSelector((state: RootState) => state.currentUser);
-  const defaultTheme = createTheme();
   const { productId, quantities } = props;
   const placeOrder = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
@@ -72,7 +70,6 @@ const Form = (props: { productId: number; quantities: number[] }) => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container
         component="main"
         maxWidth="xs"
@@ -125,7 +122,6 @@ const Form = (props: { productId: number; quantities: number[] }) => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 };
 

@@ -23,8 +23,8 @@ export const SearchResult = () => {
   }, [searchTerm]);
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>Search result for {searchTerm}</h1>
+    <div className="py-8 px-8">
+      <p className="m-1 text-2xl font-bold">Search result for {searchTerm}</p>
       <ProductsList productsList={productsList} />
     </div>
   );

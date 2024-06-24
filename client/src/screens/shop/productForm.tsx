@@ -8,7 +8,6 @@ import {
   Typography,
   TextField,
   Button,
-  createTheme,
   Card,
   CardContent,
   Grid,
@@ -21,7 +20,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ICreateProductInput } from "../../interfaces/inputs";
 import { GetCurrentShopProductApi, createProductApi } from "../../svc/product";
 import ProductCard from "../product/productCard";
-const defaultTheme = createTheme();
 
 export const ProductForm = () => {
   const [productsList, setProductsList] = useState<IProductCard[]>([]);
@@ -138,105 +136,103 @@ const Form = (props: {
   return (
     <Dialog fullWidth open={open} onClose={handleClose}>
       <DialogContent>
-        <ThemeProvider theme={defaultTheme}>
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBlock: 3,
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <AddBusinessIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Add product to your shop
+            </Typography>
             <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                marginBlock: 3,
-              }}
+              component="form"
+              onSubmit={handleCreateProduct}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <AddBusinessIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Add product to your shop
-              </Typography>
-              <Box
-                component="form"
-                onSubmit={handleCreateProduct}
-                noValidate
-                sx={{ mt: 1 }}
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="productName"
+                label="Product Name"
+                type="text"
+                id="product-name"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="productType"
+                label="Product Type"
+                type="text"
+                id="product-type"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="productCondition"
+                label="Product Condition"
+                type="text"
+                id="product-condition"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="price"
+                label="Price"
+                type="text"
+                id="price"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+                name="originalPurchasedDate"
+                label="Original Purchased Date"
+                type="date"
+                id="original-purchased-date"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="originalPurchaisingRecieptNo"
+                label="Original Purchaising Reciept No"
+                type="text"
+                id="original-purchaising-reciept-no"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="productDescription"
+                label="Product Description"
+                type="text"
+                id="product-description"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
               >
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="productName"
-                  label="Product Name"
-                  type="text"
-                  id="product-name"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="productType"
-                  label="Product Type"
-                  type="text"
-                  id="product-type"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="productCondition"
-                  label="Product Condition"
-                  type="text"
-                  id="product-condition"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="price"
-                  label="Price"
-                  type="text"
-                  id="price"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  InputLabelProps={{ shrink: true }}
-                  name="originalPurchasedDate"
-                  label="Original Purchased Date"
-                  type="date"
-                  id="original-purchased-date"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="originalPurchaisingRecieptNo"
-                  label="Original Purchaising Reciept No"
-                  type="text"
-                  id="original-purchaising-reciept-no"
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="productDescription"
-                  label="Product Description"
-                  type="text"
-                  id="product-description"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  create shop
-                </Button>
-              </Box>
+                create shop
+              </Button>
             </Box>
-          </Container>
-        </ThemeProvider>
+          </Box>
+        </Container>
       </DialogContent>
     </Dialog>
   );

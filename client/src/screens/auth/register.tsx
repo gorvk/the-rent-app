@@ -8,11 +8,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useNavigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { IRegisterInput } from "../../interfaces/inputs";
 import { registerApi } from "../../svc/auth";
 
-const defaultTheme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
@@ -39,7 +37,6 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -131,6 +128,5 @@ export default function Register() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

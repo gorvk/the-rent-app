@@ -1,10 +1,4 @@
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import { IProductCard } from "../../interfaces/models";
-import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = (props: { product: IProductCard }) => {
@@ -12,57 +6,30 @@ const ProductCard = (props: { product: IProductCard }) => {
   const subHeader = `${product.productType} - ${product.shopName}`;
   const navigate = useNavigate();
 
-  const cardCssProp: React.CSSProperties = {
-    width: 300,
-    height: 380,
-    backgroundColor: "white",
-    cursor: "pointer",
-    boxShadow: "0px 0px 0px 1px rgb(140 140 140/.2)",
-  };
-
   const navigateToProductDetails = () => {
     const url = `/product?i=${product.productId}`;
     navigate(url);
   };
 
-  const ProductCardTypography = (props: { children: string }) => {
-    return (
-      <Typography
-        variant="body2"
-        overflow={"hidden"}
-        whiteSpace={"nowrap"}
-        textOverflow={"ellipsis"}
-        width="90%"
-      >
-        {props.children}
-      </Typography>
-    );
-  };
-
   return (
-    <Card onClick={navigateToProductDetails} style={cardCssProp}>
-      <CardMedia
-        component="img"
-        height="194"
-        width="194"
-        image="https://m.media-amazon.com/images/I/71msFUl565L._SL1500_.jpg"
-        alt="Paella dish"
+    <div
+      onClick={navigateToProductDetails}
+      className="bg-white shadow-[0px_0px_0px_1px_#8c8c8c33] m-1 cursor-pointer hover:shadow-[0px_0px_0px_1px_#8c8c8c80]"
+    >
+      <img
+        className="w-64 mx-auto"
+        src="https://m.media-amazon.com/images/I/71msFUl565L._SL1500_.jpg"
       />
-      <Divider />
-      <CardHeader
-        title={product.productName}
-        subheader={<ProductCardTypography>{subHeader}</ProductCardTypography>}
-      />
-      <CardContent>
-        <ProductCardTypography>{product.city}</ProductCardTypography>
-        <ProductCardTypography>
-          {product.productDescription}
-        </ProductCardTypography>
-        <Typography variant="body2" color="#18b300" fontWeight="bold">
-          {product.price}
-        </Typography>
-      </CardContent>
-    </Card>
+      <hr />
+      <div className="bg-white px-3 py-5">
+        <p className="truncate text-2xl">{product.productName}</p>
+        <p className="truncate text-gray-500">{subHeader}</p>
+        <br />
+        <p className="truncate">{product.city}</p>
+        <p className="truncate">{product.productDescription}</p>
+        <p className="text-green-500 font-bold">{product.price}</p>
+      </div>
+    </div>
   );
 };
 

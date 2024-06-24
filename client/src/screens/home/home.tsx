@@ -21,7 +21,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div className="py-8 px-8">
       <ProductsList productsList={productsList} />
     </div>
   );

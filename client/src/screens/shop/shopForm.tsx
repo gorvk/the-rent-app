@@ -10,7 +10,6 @@ import {
   Typography,
   TextField,
   Button,
-  createTheme,
   Avatar,
 } from "@mui/material";
 import Store from "@mui/icons-material/Store";
@@ -18,7 +17,6 @@ import { ICreateShopInput } from "../../interfaces/inputs";
 import { createShopApi } from "../../svc/shop";
 import userSlice from "../../state/slices/userSlice";
 
-const defaultTheme = createTheme();
 
 export const ShopForm = () => {
   const currentUser: IUser | null = useSelector((state: RootState) => {
@@ -54,7 +52,6 @@ export const ShopForm = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -161,6 +158,5 @@ export const ShopForm = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 };
