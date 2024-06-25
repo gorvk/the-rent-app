@@ -37,6 +37,18 @@ type Product struct {
 	Quantity                     int    `db:"quantity" json:"quantity"`
 }
 
+type Order struct {
+	Id                  int    `db:"id" json:"id"`
+	FromMapLocation     string `db:"from_map_location" json:"fromMapLocation"`
+	ToMapLocation       string `db:"to_map_location" json:"toMapLocation"`
+	LastStopMapLocation string `db:"last_stop_map_location" json:"lastStopMapLocation"`
+	OrderStatus         string `db:"order_status" json:"orderStatus"`
+	PaymentStatus       string `db:"payment_status" json:"paymentStatus"`
+	ProductId           int    `db:"product_id" json:"productId"`
+	BuyerId             int    `db:"buyer_id" json:"buyerId"`
+	Quantity            int    `db:"quantity" json:"quantity"`
+}
+
 type SearchProductView struct {
 	ProductId          int    `db:"product_id" json:"productId"`
 	ShopId             int    `db:"shop_id" json:"shopId"`
@@ -50,14 +62,11 @@ type SearchProductView struct {
 	Country            string `db:"country" json:"country"`
 }
 
-type Order struct {
-	Id                  string `db:"id" json:"id"`
-	FromMapLocation     string `db:"from_map_location" json:"fromMapLocation"`
-	ToMapLocation       string `db:"to_map_location" json:"toMapLocation"`
-	LastStopMapLocation string `db:"last_stop_map_location" json:"lastStopMapLocation"`
-	OrderStatus         string `db:"order_status" json:"orderStatus"`
-	PaymentStatus       string `db:"payment_status" json:"paymentStatus"`
-	ProductId           int    `db:"product_id" json:"productId"`
-	BuyerId             int    `db:"buyer_id" json:"buyerId"`
-	Quantity            int    `db:"quantity" json:"quantity"`
+type OrderListView struct {
+	Id          int    `db:"id" json:"id"`
+	ProductId   int    `db:"product_id" json:"productId"`
+	BuyerId     int    `db:"buyer_id" json:"-"`
+	OrderStatus string `db:"order_status" json:"orderStatus"`
+	ProductName string `db:"product_name" json:"productName"`
+	Price       string `db:"price" json:"price"`
 }

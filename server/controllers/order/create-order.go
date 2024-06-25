@@ -14,6 +14,13 @@ import (
 )
 
 func CreateOrder(w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	err = common.CheckHttpResponseType(w, r, http.MethodPost)
+	if err != nil {
+		return
+	}
+
 	user, err := common.IsAuthenticated(r)
 	if err != nil {
 		common.HandleHttpError(err, w, constants.ERROR_HTTP_UNAUTHORIZED, http.StatusUnauthorized)

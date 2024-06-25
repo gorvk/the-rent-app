@@ -35,6 +35,18 @@ export interface IShop {
     shopDescription: string
 }
 
+export interface IOrder {
+    id: number,
+    fromMapLocation: string,
+    toMapLocation: string,
+    lastStopMapLocation: string,
+    orderStatus: string,
+    paymentStatus: string,
+    productId: number,
+    buyerId: number,
+    quantity: number
+}
+
 export interface IProductCard {
     productId: number,
     productName: string,
@@ -45,4 +57,12 @@ export interface IProductCard {
     shopName: string,
     city: string,
     country: string
+}
+
+export interface IOrderList {
+    id: number,
+    productId: number,
+    orderStatus: string,
+    productName: string,
+    price: string,
 }

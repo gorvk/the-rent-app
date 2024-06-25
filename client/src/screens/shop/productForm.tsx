@@ -20,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ICreateProductInput } from "../../interfaces/inputs";
 import { GetCurrentShopProductApi, createProductApi } from "../../svc/product";
-import ProductCard from "../product/productCard";
+import { ProductsList } from "../product/productsList";
 const defaultTheme = createTheme();
 
 export const ProductForm = () => {
@@ -63,42 +63,36 @@ export const ProductForm = () => {
   };
 
   return (
-    <>
-      <Grid item>
-        <Grid
-          container
-          justifyContent={{ xs: "center", md: "center", lg: "left" }}
-          rowSpacing={9}
-          columnSpacing={9}
-        >
-          <Grid onClick={handleClickOpen} item>
-            <Card style={cardCssProp}>
-              <CardContent
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "85%",
-                }}
-              >
-                <AddCircleIcon />
-                <div>Add new Product</div>
-              </CardContent>
-            </Card>
-          </Grid>
-          {productsList.map((product, index) => (
-            <Grid key={index} item>
-              <ProductCard product={product} />
-            </Grid>
-          ))}
+    <div style={{ padding: "40px" }}>
+      <Grid
+        container
+        justifyContent={{ xs: "center", md: "center", lg: "left" }}
+        rowSpacing={9}
+        columnSpacing={9}
+      >
+        <Grid onClick={handleClickOpen} item>
+          <Card style={cardCssProp}>
+            <CardContent
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "85%",
+              }}
+            >
+              <AddCircleIcon />
+              <div>Add new Product</div>
+            </CardContent>
+          </Card>
         </Grid>
+        <ProductsList productsList={productsList} />
       </Grid>
       <Form
         open={open}
         handleClose={handleClose}
         refreshProductsList={GetCurrentShopProduct}
       />
-    </>
+    </div>
   );
 };
 
@@ -125,7 +119,7 @@ const Form = (props: {
         originalPurchaisingRecieptNo:
           data.get("originalPurchaisingRecieptNo")?.toString() || "",
         productDescription: data.get("productDescription")?.toString() || "",
-        quantity: parseInt(data.get("quantity")?.toString() || "1")
+        quantity: parseInt(data.get("quantity")?.toString() || "1"),
       };
       const response = await createProductApi(payload);
       if (response.isSuccess) {
@@ -146,7 +140,6 @@ const Form = (props: {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
                 marginBlock: 3,
               }}
             >

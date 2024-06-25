@@ -1,4 +1,4 @@
-import { IProduct, IProductCard, IUser } from "./models";
+import { IOrderList, IProduct, IProductCard, IUser } from "./models";
 
 export interface IGetAllProductsOutput {
     isSuccess: boolean,
@@ -28,4 +28,9 @@ export interface IGetCurrentShopProductOutput {
 export interface IGetProductOutput {
     isSuccess: boolean,
     result: IProduct
+}
+
+export interface IGetCurrentUserOrdersOutput {
+    isSuccess: boolean,
+    result: IOrderList[]
 }

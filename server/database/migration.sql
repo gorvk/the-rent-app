@@ -46,16 +46,14 @@ CREATE TABLE IF NOT EXISTS Orders (
     payment_status VARCHAR NOT NULL,
     product_id SERIAL NOT NULL,
     buyer_id SERIAL NOT NULL,
-    shop_id SERIAL NOT NULL,
     quantity INTEGER NOT NULL,
     FOREIGN KEY (product_id) REFERENCES Products(id),
-    FOREIGN KEY (buyer_id) REFERENCES Users(id),
-    FOREIGN KEY (shop_id) REFERENCES Shops(id)
+    FOREIGN KEY (buyer_id) REFERENCES Users(id)
 );
 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
-CREATE MATERIALIZED VIEW IF NOT EXISTS public.search_products_view TABLESPACE pg_default AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS search_products_view TABLESPACE pg_default AS
     SELECT 
         products.id product_id,
         product_name,
@@ -77,7 +75,7 @@ CREATE INDEX IF NOT EXISTS search_products_view_product_name ON search_products_
     )
 );
 
-CREATE MATERIALIZED VIEW IF NOT EXISTS public.product_detail_view TABLESPACE pg_default AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS product_detail_view TABLESPACE pg_default AS
     SELECT 
         products.id products_id,
         products.product_name,
@@ -101,3 +99,15 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS public.product_detail_view TABLESPACE pg_
         LEFT JOIN shops ON products.shop_id = shops.id;
 
 CREATE INDEX IF NOT EXISTS product_detail_view_id ON product_detail_view (products_id);
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS order_list_view TABLESPACE pg_default AS
+    SELECT 
+        orders.product_id,
+        orders.buyer_id,
+        orders.id,
+        orders.order_status,
+        products.product_name,
+        products.price
+    FROM orders
+        LEFT JOIN products ON orders.product_id = products.id;
+CREATE INDEX IF NOT EXISTS order_list_view_index ON order_list_view (buyer_id);
